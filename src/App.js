@@ -1,46 +1,46 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 import "./App.css";
-import { Container , Jumbotron  } from "react-bootstrap";
+import { Container, Jumbotron } from "react-bootstrap";
 import Menu from "./components/Menu";
 import Home from "./components/Home";
 import Board from "./components/Board";
 import Question from "./components/Question";
 import AddQuestion from "./components/AddQuestion";
 import Login from "./components/Login";
+import {Component } from 'react'
+// import {getInitialData} from './actions/shared'
 
-function App() {
+class App extends Component {
+
+  componentDidMount(){
+    // this.props.dispatch(getInitialData())
+  }
+  
+  render(){
+    console.log(this.props)
   return (
     <Router>
       <div className="App">
         <Container>
           <Menu />
-          <Switch>
-            <Jumbotron>
-              <Route path="/home">
-                <Home />
-              </Route>
-              <Route path="/questions/:id">
-                <Question />
-              </Route>
-              <Route path="/leaderboard">
-                <Board />
-              </Route>
-              <Route path="/add">
-                <AddQuestion />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route exact path="/">
-                <Home />
-              </Route>
-            </Jumbotron>
-          </Switch>
+          <Jumbotron>
+            <Switch>
+              <Route path="/home" component={Home} />
+              <Route path="/questions/:id" component={Question} />
+              <Route path="/leaderboard" component={Board} />
+              <Route path="/add" component={AddQuestion} />
+              <Route path="/login" component={Login} />
+              <Route path="/" component={Home} />
+            </Switch>
+          </Jumbotron>
         </Container>
       </div>
     </Router>
   );
+  }
 }
+const mapStateToProps = (store) => store;
 
-export default App;
+export default connect(mapStateToProps)(App);

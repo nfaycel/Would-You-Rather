@@ -8562,6 +8562,11 @@ react-bootstrap@^1.0.0:
     uncontrollable "^7.0.0"
     warning "^4.0.3"
 
+react-cool-tabs@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/react-cool-tabs/-/react-cool-tabs-1.1.6.tgz#1005f6df35a397f7537039129f3f55b6c399a71b"
+  integrity sha512-vTsvSxM5FWIKaEkE1DyOZoqfeX4gwf8XG3lUqwv6J2JhoGjXmnneZCbNlwr7J1zsmkfl+/jruoI+0EDy9nV6MA==
+
 react-dev-utils@^10.2.1:
   version "10.2.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-10.2.1.tgz#f6de325ae25fa4d546d09df4bb1befdc6dd19c19"
