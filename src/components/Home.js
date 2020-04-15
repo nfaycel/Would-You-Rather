@@ -13,9 +13,9 @@ class Question extends Component {
     const question = this.props;
     return (
       <div
-        className="card flex-row flex-wrap text-left"
-        style={{ width: "100%" }}
-      >
+        className="card flex-row flex-wrap text-left shadow-sm p-3 mb-2 bg-white rounded"
+        //shadow-sm p-3 mb-2 bg-white rounded
+        style={{ width: "100%" }}>
         <div className="card-header border-0">
           <Avatar color={"#C28EFC"} src={login} size="80" round={true} />
         </div>
@@ -42,13 +42,13 @@ class QuestionList extends Component {
     return (
       <ListGroup style={{ width: "100%" }}>
         {console.log("filter = :", this.props.filter)}
-        {this.props.filter === "answered"
+        {this.props.filter === "unanswered"
           ? questionsList
               .filter(
                 (question) =>
-                  question.optionOne.votes.indexOf(this.props.authedUser) >
-                    -1 ||
-                  question.optionTwo.votes.indexOf(this.props.authedUser) > -1
+                  question.optionOne.votes.indexOf(this.props.authedUser) <=-1 &&
+                  question.optionTwo.votes.indexOf(this.props.authedUser) <= -1
+                 
               )
               .map((question) => (
                 <ListGroup.Item key={question.id}>
@@ -58,9 +58,8 @@ class QuestionList extends Component {
           : questionsList
               .filter(
                 (question) =>
-                  question.optionOne.votes.indexOf(this.props.authedUser) <=
-                    -1 &&
-                  question.optionTwo.votes.indexOf(this.props.authedUser) <= -1
+                  question.optionOne.votes.indexOf(this.props.authedUser) > -1 ||
+                  question.optionTwo.votes.indexOf(this.props.authedUser) > -1
               )
               .map((question) => (
                 <ListGroup.Item key={question.id}>
@@ -81,7 +80,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      filter: "answered",
+      filter: "unanswered",
     };
   }
 
@@ -106,17 +105,17 @@ class Home extends Component {
           <Nav
             justify
             variant="tabs"
-            defaultActiveKey="answered"
+            defaultActiveKey="unanswered"
             onSelect={(e) => this.toggleFilter(e)}
           >
             <Nav.Item>
-              <Nav.Link eventKey="answered" style={{ color: "#9615a5ed" }}>
-                Answered Questions
+              <Nav.Link eventKey="unanswered" style={{ color: "#9615a5ed" }}>
+                Unanswered Questions
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey="unanswered" style={{ color: "#9615a5ed" }}>
-                Unanswered Questions
+              <Nav.Link eventKey="answered" style={{ color: "#9615a5ed" }}>
+                answered Questions
               </Nav.Link>
             </Nav.Item>
           </Nav>
