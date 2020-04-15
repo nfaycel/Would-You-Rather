@@ -10,3 +10,16 @@ body{
 .navItem {
   color: white;
 }
+
+.btn-primary {
+  background-color: blueviolet !important;
+  border-color: blueviolet !important;
+}
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+  background-color: rgb(113, 18, 201) !important;
+  border-color: rgb(113, 18, 201)  !important;
+}
+

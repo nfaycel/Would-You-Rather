@@ -55,13 +55,13 @@ class Login extends Component {
               <Col sm={4}>
                 <Form.Control as="select" value={this.state.value}  onChange={this.handleSelect}>
                   <option>Choose...</option>
-                  <option value="Nouar Faical">Nouar Faical</option>
-                  <option value="Nouar Billal">Nouar Billal</option>
-                  <option value="Nouar Fethi">Nouar Fethi</option>
+                  <option value="johndoe">johndoe</option>
+                  <option value="tylermcginnis">tylermcginnis</option>
+                  <option value="sarahedo">sarahedo</option>
                 </Form.Control>
               </Col>
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" block size="sm">
               Login
             </Button>
           </Form>

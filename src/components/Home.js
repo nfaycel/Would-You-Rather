@@ -1,27 +1,37 @@
 import React, { Component } from "react";
-import { Col, Container, Row, ListGroup } from "react-bootstrap";
+import { Col, Container, Row, ListGroup,Button,Badge } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { getInitialData } from "../actions/shared";
-import { Card, Nav } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
+import login from "../shared/img/login.png";
+import Avatar from 'react-avatar';
+import {Link} from 'react-router-dom'
 
 class Question extends Component {
   render() {
     const question = this.props;
     return (
-      <Card>
-        <Card.Img variant="top" src="holder.js/100px160" />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
-        </Card.Footer>
-      </Card>
+      <div
+        className="card flex-row flex-wrap text-left"
+        style={{ width: "100%" }}
+      >
+        <div className="card-header border-0">
+          <Avatar color={"#C28EFC"} src={login} size="80" round={true} />
+        </div>
+        <div className="card-block px-2">
+        <Badge variant="light">{question.question.author} asks:</Badge>
+          <h5 className="card-text">Would you rather</h5>
+          <p className="card-text">{question.question.optionOne.text}</p>
+        </div>
+
+        <div className="card-footer w-100 text-muted">
+          <Button as={Link} to={`/questions/${question.question.id}`} variant="secondary" size="sm">
+            View Poll
+          </Button>
+          {/* <Link className='btn' to={`/questions/${question.question.id}`}>View Poll</Link> */}
+        </div>
+      </div>
     );
   }
 }
@@ -30,14 +40,15 @@ class QuestionList extends Component {
   render() {
     const questionsList = Object.values(this.props.questions);
     return (
-      <ListGroup>
-        {console.log("filter = :",this.props.filter)}
+      <ListGroup style={{ width: "100%" }}>
+        {console.log("filter = :", this.props.filter)}
         {this.props.filter === "answered"
           ? questionsList
               .filter(
                 (question) =>
-                  question.optionOne.votes.indexOf("sarahedo") > -1 ||
-                  question.optionTwo.votes.indexOf("sarahedo") > -1
+                  question.optionOne.votes.indexOf(this.props.authedUser) >
+                    -1 ||
+                  question.optionTwo.votes.indexOf(this.props.authedUser) > -1
               )
               .map((question) => (
                 <ListGroup.Item key={question.id}>
@@ -47,8 +58,9 @@ class QuestionList extends Component {
           : questionsList
               .filter(
                 (question) =>
-                  question.optionOne.votes.indexOf("sarahedo") <= -1 &&
-                  question.optionTwo.votes.indexOf("sarahedo") <= -1
+                  question.optionOne.votes.indexOf(this.props.authedUser) <=
+                    -1 &&
+                  question.optionTwo.votes.indexOf(this.props.authedUser) <= -1
               )
               .map((question) => (
                 <ListGroup.Item key={question.id}>
@@ -59,7 +71,6 @@ class QuestionList extends Component {
     );
   }
 }
-
 
 class Home extends Component {
   componentDidMount() {
@@ -110,7 +121,11 @@ class Home extends Component {
             </Nav.Item>
           </Nav>
           <Row style={{ backgroundColor: "white", margin: "0px 1px 0px 1px" }}>
-            <QuestionList questions={questions} filter={this.state.filter} />
+            <QuestionList
+              questions={questions}
+              filter={this.state.filter}
+              authedUser={authedUser}
+            />
           </Row>
         </Col>
       </Container>
