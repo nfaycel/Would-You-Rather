@@ -9,17 +9,19 @@ export default function questions(state = {}, action) {
         ...action.questions,
       };
     case SAVE_QUESTION_ANSWER:
-        console.log("action from save_action_answer",action)
-        console.log("the state=",state)
+      console.log("action from save_action_answer", action);
+      console.log("the state=",{...state});
       return {
-        ...state,
-            [action.qId]: {
-              ...state[action.qId],
-              [action.answer]: {
-                ...state[action.qId][action.answer],
-                votes: state[action.qId][action.answer].votes.concat([action.authedUser])
-                }
-              }
+          ...state,
+          [action.qId]: {
+            ...state[action.qId],
+            [action.answer]: {
+              ...state[action.qId][action.answer],
+              votes: state[action.qId][action.answer].votes.concat([
+                action.authedUser,
+              ]),
+            },
+          }
       };
 
     default:

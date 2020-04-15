@@ -6,6 +6,7 @@ import login from "../shared/img/login.png";
 import Avatar from 'react-avatar';
 import {handleSaveQuestionResponse} from '../actions/questions'
 
+
 class Question extends Component {
     constructor(props) {
         super(props);
@@ -23,6 +24,7 @@ class Question extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch(handleSaveQuestionResponse(this.props.id,this.state.select))
+
         console.log('You have selected:', this.state.select);
 
     }
@@ -32,7 +34,7 @@ class Question extends Component {
         const poll = this.props.questions[this.props.id]
         if(this.props.authedUser=== null) return (<Redirect to="/Login" />)
         return (
-            
+
             <div>
                 {!(poll.optionOne.votes.includes(this.props.authedUser))&&
                     !(poll.optionTwo.votes.includes(this.props.authedUser))
@@ -78,17 +80,33 @@ class Question extends Component {
                   </div>
                 </div>
               )
-                : <ul>
-                    <h4>Results</h4>
-                    <li>poll author: {poll.author}</li>
-                    <li>poll id: {poll.id}</li>
-                    <li>poll optionOne: {poll.optionOne.text}</li>
-                    ({poll.optionOne.votes.map( user => "- "+user+",")})
-                    <li>poll optionTwo: {poll.optionTwo.text}</li>
-                    ({poll.optionTwo.votes.map( user => "- "+user+",")})
-                    <li>poll timestamp: {poll.timestamp}</li>
-                </ul>
-                }
+                : (
+                  <div className="container col-sm-10 col-md-8">
+                  <div className="card">
+                  <div className='card-header'><h5>Asked by {this.props.authedUser}</h5> </div>
+                <div className="row mr-5">
+                  <div className="col-md-3 d-flex justify-content-md-center align-items-center ">
+                      <Avatar color={"#C28EFC"} src={login} size="90" round={true}/>
+                    </div>
+                    <div className="col-md-9 px-3" style={{borderLeft: "solid",borderColor:"#FEFBDF", margin: "3px 0 3px 0"}}>
+                      <div className="card-block px-3">
+                        <h4 className="card-title">Result</h4>
+                        <ul>
+                          <li>poll author: {poll.author}</li>
+                          <li>poll id: {poll.id}</li>
+                          <li>poll optionOne: {poll.optionOne.text}</li>
+                          ({poll.optionOne.votes.map( user => "- "+user+",")})
+                          <li>poll optionTwo: {poll.optionTwo.text}</li>
+                          ({poll.optionTwo.votes.map( user => "- "+user+",")})
+                          <li>poll timestamp: {poll.timestamp}</li>
+                        </ul>
+                      </div>
+                    </div>
+          
+                  </div>
+                </div>
+              </div>
+        )}
                 
             </div>
         )

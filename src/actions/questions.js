@@ -1,4 +1,5 @@
 import {saveQuestionAnswer} from '../utils/api'
+import {saveQuestionResponseUser} from '../actions/users'
 
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS"
 export const SAVE_QUESTION_ANSWER = "SAVE_QUESTION_ANSWER" //authedUser, qid, answer
@@ -26,7 +27,10 @@ export function handleSaveQuestionResponse(qId,answer){
             qid:qId,
             answer,
         })
-        .then(dispatch(saveQuestionResponse({authedUser,qId,answer})))
-        
+        .then(
+            dispatch(saveQuestionResponse({authedUser,qId,answer}))
+        ).then(
+            dispatch(saveQuestionResponseUser({authedUser,qId,answer}))
+        )
     }
 }
