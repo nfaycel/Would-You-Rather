@@ -12,6 +12,7 @@ class Question extends Component {
   render() {
     const question = this.props;
     return (
+      // <Link to={`/questions/${question.question.id}`} 
       <div
         className="card flex-row flex-wrap text-left shadow-sm p-3 mb-2 bg-white rounded"
         //shadow-sm p-3 mb-2 bg-white rounded
@@ -31,7 +32,8 @@ class Question extends Component {
           </Button>
           {/* <Link className='btn' to={`/questions/${question.question.id}`}>View Poll</Link> */}
         </div>
-      </div>
+        </div>
+      // </Link>
     );
   }
 }
