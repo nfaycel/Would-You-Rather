@@ -11,6 +11,12 @@ import {Link} from 'react-router-dom'
 class Question extends Component {
   render() {
     const question = this.props;
+    function formatDate (timestamp) {
+      const d = new Date(timestamp)
+      const time = d.toLocaleTimeString('en-US')
+      return time.substr(0, 5) + time.slice(-2) + ' | ' + d.toLocaleDateString()
+    }
+    
     return (
       // <Link to={`/questions/${question.question.id}`} 
       <div
@@ -25,6 +31,7 @@ class Question extends Component {
           <h5 className="card-text">Would you rather</h5>
           <p className="card-text">{question.question.optionOne.text}</p>
         </div>
+        <span className='badge badge-light'>{formatDate(question.question.timestamp)}</span>
 
         <div className="card-footer w-100 text-muted">
           <Button as={Link} to={`/questions/${question.question.id}`} variant="secondary" size="sm">
@@ -40,7 +47,10 @@ class Question extends Component {
 
 class QuestionList extends Component {
   render() {
-    const questionsList = Object.values(this.props.questions);
+    const questionsList = Object.values(this.props.questions).sort(function(a, b){return b.timestamp - a.timestamp});
+    
+
+    
     return (
       <ListGroup style={{ width: "100%" }}>
         {console.log("filter = :", this.props.filter)}
