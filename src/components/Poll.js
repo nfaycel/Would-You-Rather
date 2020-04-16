@@ -7,7 +7,7 @@ import Avatar from 'react-avatar';
 import {handleSaveQuestionResponse} from '../actions/questions'
 
 
-class Question extends Component {
+class Poll extends Component {
     constructor(props) {
         super(props);
     
@@ -68,7 +68,6 @@ class Question extends Component {
                                       checked={this.state.select === "optionTwo"}
                                       onChange={(e)=>this.handleSelect(e)}
                                       value="optionTwo"/>
-
                                   </div>
                             </fieldset> 
                             <Button disabled={this.state.select===""} variant="primary" type="submit" block size="sm" className="mb-3">Submit</Button>
@@ -126,4 +125,4 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch,
   });
 
-export default connect(mapStateToProps,mapDispatchToProps)(Question)
+export default connect(mapStateToProps,mapDispatchToProps)(Poll)

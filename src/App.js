@@ -6,7 +6,7 @@ import { Container, Jumbotron } from "react-bootstrap";
 import Menu from "./components/Menu";
 import Home from "./components/Home";
 import Board from "./components/Board";
-import Question from "./components/Question";
+import Poll from "./components/Poll";
 import AddQuestion from "./components/AddQuestion";
 import Login from "./components/Login";
 import {Component } from 'react'
@@ -28,7 +28,7 @@ class App extends Component {
           <Jumbotron>
             <Switch>
               <Route path="/home" component={Home} />
-              <Route path="/questions/:id" component={Question} />
+              <Route path="/questions/:id" component={Poll} />
               <Route path="/leaderboard" component={Board} />
               <Route path="/add" component={AddQuestion} />
               <Route path="/login" component={Login} />
