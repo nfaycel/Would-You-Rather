@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Card, Button, Container, Form } from "react-bootstrap";
+import { handleAddQuestion } from "../actions/questions";
 
 class AddQuestion extends Component {
     constructor(props) {
@@ -29,8 +30,8 @@ class AddQuestion extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         alert(this.props.authedUser+", "+this.state.optionOne+",  "+this.state.optionTwo)
-        // this.props.dispatch({type:"LOGIN", id:this.state.value})
-        // this.props.history.push('/')
+        this.props.dispatch(handleAddQuestion(this.state.optionOne,this.state.optionTwo))
+        this.props.history.push('/')
       };
 
 

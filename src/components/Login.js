@@ -32,8 +32,8 @@ class Login extends Component {
     this.props.dispatch({type:"LOGIN", id:this.state.value})
     this.props.history.push('/')
   };
+
   render() {
- 
     return (
       <Card className="text-center col-md-12 col-lg-8 justify-content-center"   style={{ margin: "auto" }} >
         <Card.Header>
@@ -54,14 +54,14 @@ class Login extends Component {
               </Form.Label>
               <Col sm={4}>
                 <Form.Control as="select" value={this.state.value}  onChange={this.handleSelect}>
-                  <option>Choose...</option>
+                  <option value="">Choose...</option>
                   <option value="johndoe">johndoe</option>
                   <option value="tylermcginnis">tylermcginnis</option>
                   <option value="sarahedo">sarahedo</option>
                 </Form.Control>
               </Col>
             </Form.Group>
-            <Button variant="primary" type="submit" block size="sm">
+            <Button variant="primary" type="submit" block size="sm" disabled={this.state.value ===""}>
               Login
             </Button>
           </Form>

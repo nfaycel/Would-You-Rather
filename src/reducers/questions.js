@@ -1,5 +1,6 @@
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS";
 export const SAVE_QUESTION_ANSWER = "SAVE_QUESTION_ANSWER";
+export const ADD_QUESTION = "ADD_QUESTION"
 
 export default function questions(state = {}, action) {
   switch (action.type) {
@@ -22,6 +23,23 @@ export default function questions(state = {}, action) {
               ]),
             },
           }
+      };
+
+      case ADD_QUESTION:
+      return {
+        ...state,
+            "test":{
+                author:[action.authedUser],
+                id:Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+                optionOne:{
+                    votes:[],
+                    text:action.optionOne
+                },
+                optionTwo:{
+                    votes:[],
+                    text:action.optionTwo
+                },
+            }
       };
 
     default:
