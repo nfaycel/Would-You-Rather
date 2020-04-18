@@ -7,7 +7,7 @@ export default function questions(state = {}, action) {
     case LOAD_QUESTIONS:
       return {
         ...state,
-        ...action.questions,
+          ...action.questions,
       };
     case SAVE_QUESTION_ANSWER:
       console.log("action from save_action_answer", action);
@@ -26,23 +26,11 @@ export default function questions(state = {}, action) {
       };
 
       case ADD_QUESTION:
-        const id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+        // const id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+        console.log(action)
       return {
         ...state,
-            [id]:
-            {
-                author:action.authedUser,
-                id:id,
-                timestamp: Date.now(),
-                optionOne:{
-                    votes:[],
-                    text:action.optionOne
-                },
-                optionTwo:{
-                    votes:[],
-                    text:action.optionTwo
-                },
-            }
+            [action.question.id]: action.question
       };
 
     default:

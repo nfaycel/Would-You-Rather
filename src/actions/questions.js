@@ -1,8 +1,7 @@
 import { saveQuestionAnswer } from "../utils/api";
-import { saveQuestion } from "../utils/api"
+import { saveQuestion } from "../utils/api";
 import { saveQuestionResponseUser } from "../actions/users";
-import { showLoading, hideLoading } from 'react-redux-loading-bar'
-
+import { showLoading, hideLoading } from "react-redux-loading-bar";
 
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS";
 export const SAVE_QUESTION_ANSWER = "SAVE_QUESTION_ANSWER"; //authedUser, qid, answer
@@ -15,10 +14,10 @@ export function loadQuestions(questions) {
   };
 }
 
-export function saveQuestionResponse({ authedUser, qId, answer }) {
+export function saveQuestionResponse({ author, qId, answer }) {
   return {
     type: SAVE_QUESTION_ANSWER,
-    authedUser,
+    authedUser:author,
     qId,
     answer,
   };
@@ -26,38 +25,32 @@ export function saveQuestionResponse({ authedUser, qId, answer }) {
 
 export function handleSaveQuestionResponse(qId, answer) {
   return (dispatch, getState) => {
-    dispatch(showLoading())
-    const { authedUser } = getState();
-    return saveQuestionAnswer({
-      authedUser,
-      qid: qId,
-      answer
-    },getState().questions)
-      .then(dispatch(saveQuestionResponse({ authedUser, qId, answer })))
-      .then(dispatch(saveQuestionResponseUser({ authedUser, qId, answer })))
+    dispatch(showLoading());
+    const author = getState().authedUser
+ 
+
+    return saveQuestionAnswer({authedUser:author,qid:qId,answer})
+      .then(()=> dispatch(saveQuestionResponse({ author, qId, answer })))
+      .then(()=> dispatch(saveQuestionResponseUser({ author, qId, answer })));
   };
 }
 
-export function addQuestion({ optionOne, optionTwo, authedUser }) {
+export function addQuestion(question) {
   return {
     type: ADD_QUESTION,
-    optionOne,
-    optionTwo,
-    authedUser,
+    question,
   };
 }
 
-
-export function handleAddQuestion(optionOne, optionTwo) {
-  //{ optionOneText, optionTwoText, author }
+export function handleAddQuestion(optionOne, optionTwo,authedUser) {
   return (dispatch, getState) => {
-    // dispatch(showLoading())
-    const { authedUser } = getState();
+    dispatch(showLoading());
     return saveQuestion({
-        optionOneText:optionOne,
-        optionTwoText:optionTwo,
-        author:authedUser,
-    }).then(dispatch(addQuestion({ optionOne, optionTwo, authedUser })))
+      optionOneText: optionOne,
+      optionTwoText: optionTwo,
+      author:authedUser,
+    })
+      .then((question) => dispatch(addQuestion(question)))
+      .then(() => hideLoading());
   };
 }
-

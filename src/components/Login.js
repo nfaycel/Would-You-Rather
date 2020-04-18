@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, Button, Form, Row, Col, img } from "react-bootstrap";
 import image from "../shared/img/login.png";
-import { Redirect } from 'react-router-dom'
+import { Redirect } from "react-router-dom";
 import { getInitialData } from "../actions/shared";
-
 
 class Login extends Component {
   componentDidMount() {
@@ -20,35 +19,37 @@ class Login extends Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.state = {
+ 
+  }
+   state = {
       value: "",
       toPrev: false,
     };
-  }
-
   handleSelect = (e) => {
     this.setState({ value: e.target.value });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { id } = this.props
+    const { id } = this.props;
 
-
-    this.props.dispatch({ type: "LOGIN", id: this.state.value });
-
-    this.setState({toPrev: id ? false : true})
-    
-    // this.props.history.push("/");
+    this.props.dispatch({ type: "LOGIN", id: this.state.value });     
+    this.setState({ toPrev: id ? false : true });
   };
 
   render() {
-    const {toPrev} = this.state
-    const { redirectUrl } = this.props.location.state
-    if(toPrev === true){
-      return <Redirect to={redirectUrl}/>
+    const { toPrev } = this.state;
+    const { redirectUrl } = this.props.location.state !== undefined? this.props.location.state:""
+
+    console.log("this.props.id",this.toPrev)
+    console.log("redirectUrl:",this.props.location.state)
+    console.log("this.props.authedUser",this.props.authedUser)
+    console.log("this.props.id",this.props.id)
+
+    if (toPrev === true ){
+      return <Redirect to={redirectUrl} />;
     }
-      
+
     return (
       <Card
         className="text-center col-md-12 col-lg-8 justify-content-center"

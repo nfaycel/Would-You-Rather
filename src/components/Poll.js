@@ -31,11 +31,9 @@ class Poll extends Component {
       handleSaveQuestionResponse(this.props.id, this.state.select)
     );
 
-    console.log("You have selected:", this.state.select);
   };
 
   render() {
-    console.log("the id =", this.props.id);
 
     const polls = [];
     Object.entries(this.props.questions).forEach(([key, value]) => {

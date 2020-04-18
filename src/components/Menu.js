@@ -4,12 +4,29 @@ import { Navbar, Nav} from "react-bootstrap"
 import Avatar from 'react-avatar';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+import { Redirect } from 'react-router-dom'
 
 
 class Menu extends Component {
+  constructor(props) {
+    super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  state = {
+    selectedUser: '',
+    toHome: false,
+  }
+  
   componentDidMount(){
-    console.log("xxx: dispatch = ", this.props.dispatch)
-    console.log('withrouter = ',this.props.history)
+    // console.log("xxx: dispatch = ", this.props.dispatch)
+    // console.log('withrouter = ',this.props.history)
+  }
+   
+  handleLogout(){
+    console.log('lcikced')
+    this.props.dispatch({type:"LOGOUT"})
+    this.props.history.push("/home")
   }
 
 
@@ -43,7 +60,7 @@ class Menu extends Component {
               Hello: {authed_user}
             </Navbar.Text>
             <Avatar color={"#C28EFC"} name={authed_user} size="40" round={true} />
-            <Nav.Link className='ml-3' onClick={()=> dispatch({type:"LOGOUT"})}>Logout<i className="fa fa-sign-out ml-1" aria-hidden="true"></i></Nav.Link>
+            <Nav.Link className='ml-3' to="" onClick={this.handleLogout}>Logout<i className="fa fa-sign-out ml-1" aria-hidden="true"></i></Nav.Link>
           </Nav>)
           :( null
           //   <Nav>

@@ -39,7 +39,7 @@ class App extends Component {
                 <Route path="/leaderboard" component={Board} />
                 <Route path="/add" component={AddQuestion} />
                 <Route path="/login" component={Login} />
-                <Route exact path="/" component={Home} />
+                <Route path="/" component={Home} />
               </Switch>
             </Jumbotron>
           </Container>

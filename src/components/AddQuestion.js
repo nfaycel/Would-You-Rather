@@ -30,7 +30,7 @@ class AddQuestion extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
       //  alert(this.props.authedUser+", "+this.state.optionOne+",  "+this.state.optionTwo)
-        this.props.dispatch(handleAddQuestion(this.state.optionOne,this.state.optionTwo))
+        this.props.dispatch(handleAddQuestion(this.state.optionOne,this.state.optionTwo,this.props.authedUser))
         this.props.history.push('/')
       };
 

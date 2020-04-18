@@ -8,10 +8,10 @@ export function loadUsers(users){
     }
 }
 
-export function saveQuestionResponseUser({authedUser,qId,answer}){
+export function saveQuestionResponseUser({author,qId,answer}){
     return{
         type: SAVE_QUESTION_ANSWER_USER,
-        authedUser,
+        author,
         qId,
         answer,
     }

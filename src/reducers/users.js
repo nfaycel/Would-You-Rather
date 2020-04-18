@@ -11,15 +11,14 @@ export default function users(state = {}, action) {
     case SAVE_QUESTION_ANSWER_USER:
       return {
         ...state,
-        [action.authedUser]: {
-          ...state[action.authedUser],
+        [action.author]: {
+          ...state[action.author],
             answers:{
-                ...state[action.authedUser].answers,
+                ...state[action.author].answers,
                     [action.qId]:action.answer
             }
         },
       };
-      
     default:
       return state;
   }

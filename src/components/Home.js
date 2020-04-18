@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { getInitialData } from "../actions/shared";
 import { Nav } from "react-bootstrap";
 import  QuestionList from './QuestionList'
 
