@@ -9,7 +9,7 @@ import  QuestionList from './QuestionList'
 
 class Home extends Component {
   componentDidMount() {
-    if (this.props.authedUser !== null) this.props.dispatch(getInitialData());
+   // if (this.props.authedUser !== null) this.props.dispatch(getInitialData());
   }
 
   constructor(props) {
@@ -29,7 +29,8 @@ class Home extends Component {
 
   render() {
     
-    if (this.props.authedUser === null) return <Redirect to="/Login" />;
+    if (this.props.authedUser === null) 
+      return <Redirect to={{pathname: '/login', state: {redirectUrl: this.props.location.pathname}}} />;
     return (
       <Container className="justify-content-center fluid">
         <Col

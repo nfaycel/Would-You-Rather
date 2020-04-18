@@ -113,6 +113,19 @@ let users = {
         text: 'write Swift'
       }
     },
+    "waq52jjqq5ofbnm23q1hdr": {
+      id: 'waq52jjqq5ofbnm23q1hdr',
+      author: 'johndoe',
+      timestamp: 1493579767190,
+      optionOne: {
+        votes: ['johndoe'],
+        text: 'write JavaScript',
+      },
+      optionTwo: {
+        votes: ['tylermcginnis'],
+        text: 'write Swift'
+      }
+    },
   }
   
   function generateUID () {
@@ -171,7 +184,9 @@ let users = {
     })
   }
   
-  export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
+  export function _saveQuestionAnswer ({ authedUser, qid, answer },questions) {
+    console.log("mmmmmmmmm",{authedUser,qid,answer})
+    console.log("zzz questions:",questions)
     return new Promise((res, rej) => {
       setTimeout(() => {
         users = {
@@ -195,7 +210,7 @@ let users = {
             }
           }
         }
-  
+        console.log("xxxxxxx",questions)
         res()
       }, 500)
     })

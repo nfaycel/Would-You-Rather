@@ -1,6 +1,8 @@
 import { saveQuestionAnswer } from "../utils/api";
 import { saveQuestion } from "../utils/api"
 import { saveQuestionResponseUser } from "../actions/users";
+import { showLoading, hideLoading } from 'react-redux-loading-bar'
+
 
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS";
 export const SAVE_QUESTION_ANSWER = "SAVE_QUESTION_ANSWER"; //authedUser, qid, answer
@@ -24,14 +26,15 @@ export function saveQuestionResponse({ authedUser, qId, answer }) {
 
 export function handleSaveQuestionResponse(qId, answer) {
   return (dispatch, getState) => {
+    dispatch(showLoading())
     const { authedUser } = getState();
     return saveQuestionAnswer({
       authedUser,
       qid: qId,
-      answer,
-    })
+      answer
+    },getState().questions)
       .then(dispatch(saveQuestionResponse({ authedUser, qId, answer })))
-      .then(dispatch(saveQuestionResponseUser({ authedUser, qId, answer })));
+      .then(dispatch(saveQuestionResponseUser({ authedUser, qId, answer })))
   };
 }
 
@@ -40,13 +43,15 @@ export function addQuestion({ optionOne, optionTwo, authedUser }) {
     type: ADD_QUESTION,
     optionOne,
     optionTwo,
-    authedUser
+    authedUser,
   };
 }
+
 
 export function handleAddQuestion(optionOne, optionTwo) {
   //{ optionOneText, optionTwoText, author }
   return (dispatch, getState) => {
+    // dispatch(showLoading())
     const { authedUser } = getState();
     return saveQuestion({
         optionOneText:optionOne,

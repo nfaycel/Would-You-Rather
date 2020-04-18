@@ -26,11 +26,14 @@ export default function questions(state = {}, action) {
       };
 
       case ADD_QUESTION:
+        const id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
       return {
         ...state,
-            "test":{
-                author:[action.authedUser],
-                id:Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+            [id]:
+            {
+                author:action.authedUser,
+                id:id,
+                timestamp: Date.now(),
                 optionOne:{
                     votes:[],
                     text:action.optionOne

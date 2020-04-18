@@ -19,7 +19,8 @@ export function saveQuestion(data){ // data = question object
     return _saveQuestion(data)
 }
 
-export function saveQuestionAnswer(data){
+export function saveQuestionAnswer(data,questions){
     console.log("the data of action is",data) // data = { authedUser, qid, answer }
-    return _saveQuestionAnswer(data)
+    console.log("the questions are : ",questions)
+    return _saveQuestionAnswer(data,questions)
 }

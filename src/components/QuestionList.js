@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { ListGroup,Button,Badge } from "react-bootstrap";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router'
 import login from "../shared/img/login.png";
 import Avatar from 'react-avatar';
 import {Link} from 'react-router-dom'
@@ -16,7 +17,7 @@ class Question extends Component {
       
       return (
         // <Link to={`/questions/${question.question.id}`} 
-        <div
+        <Link to={`/questions/${question.question.id}`}
           className="card flex-row flex-wrap text-left shadow-sm p-3 mb-2 bg-white rounded"
           //shadow-sm p-3 mb-2 bg-white rounded
           style={{ width: "100%" }}>
@@ -31,12 +32,12 @@ class Question extends Component {
           <span className='badge badge-light'>{formatDate(question.question.timestamp)}</span>
   
           <div className="card-footer w-100 text-muted">
-            <Button as={Link} to={`/questions/${question.question.id}`} variant="secondary" size="sm">
+            <Button variant="secondary" size="sm">
               View Poll
             </Button>
             {/* <Link className='btn' to={`/questions/${question.question.id}`}>View Poll</Link> */}
           </div>
-          </div>
+          </Link>
         // </Link>
       );
     }
@@ -83,4 +84,4 @@ class Question extends Component {
     questions
   });
   
-  export default connect(mapStateToProps)(QuestionList);
+  export default withRouter(connect(mapStateToProps)(QuestionList));
