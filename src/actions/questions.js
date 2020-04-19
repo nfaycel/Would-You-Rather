@@ -1,6 +1,7 @@
 import { saveQuestionAnswer } from "../utils/api";
 import { saveQuestion } from "../utils/api";
 import { saveQuestionResponseUser } from "../actions/users";
+import { AddQuestionUser } from "../actions/users";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS";
@@ -17,7 +18,7 @@ export function loadQuestions(questions) {
 export function saveQuestionResponse({ author, qId, answer }) {
   return {
     type: SAVE_QUESTION_ANSWER,
-    authedUser:author,
+    authedUser: author,
     qId,
     answer,
   };
@@ -26,12 +27,13 @@ export function saveQuestionResponse({ author, qId, answer }) {
 export function handleSaveQuestionResponse(qId, answer) {
   return (dispatch, getState) => {
     dispatch(showLoading());
-    const author = getState().authedUser
- 
+    const author = getState().authedUser;
 
-    return saveQuestionAnswer({authedUser:author,qid:qId,answer})
-      .then(()=> dispatch(saveQuestionResponse({ author, qId, answer })))
-      .then(()=> dispatch(saveQuestionResponseUser({ author, qId, answer })));
+    return saveQuestionAnswer({ authedUser: author, qid: qId, answer })
+      .then(() =>{
+       dispatch(saveQuestionResponse({ author, qId, answer }))
+       dispatch(saveQuestionResponseUser({ author, qId, answer }))
+      })
   };
 }
 
@@ -42,15 +44,19 @@ export function addQuestion(question) {
   };
 }
 
-export function handleAddQuestion(optionOne, optionTwo,authedUser) {
+export function handleAddQuestion(optionOne, optionTwo, authedUser) {
   return (dispatch, getState) => {
     dispatch(showLoading());
     return saveQuestion({
       optionOneText: optionOne,
       optionTwoText: optionTwo,
-      author:authedUser,
+      author: authedUser,
     })
-      .then((question) => dispatch(addQuestion(question)))
+      .then((question) =>{
+        dispatch(addQuestion(question))
+        dispatch(AddQuestionUser({ qId: question.id, author: authedUser }))
+      }
+      )
       .then(() => hideLoading());
   };
 }

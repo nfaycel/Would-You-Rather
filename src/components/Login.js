@@ -39,12 +39,9 @@ class Login extends Component {
 
   render() {
     const { toPrev } = this.state;
-    const { redirectUrl } = this.props.location.state !== undefined? this.props.location.state:""
-
-    console.log("this.props.id",this.toPrev)
-    console.log("redirectUrl:",this.props.location.state)
-    console.log("this.props.authedUser",this.props.authedUser)
-    console.log("this.props.id",this.props.id)
+    const { redirectUrl } = (this.props.location.state !== undefined && this.props.location.state !== null)
+                ? this.props.location.state
+                :"/"
 
     if (toPrev === true ){
       return <Redirect to={redirectUrl} />;

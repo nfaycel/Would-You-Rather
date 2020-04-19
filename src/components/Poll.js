@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, ProgressBar } from "react-bootstrap";
 import login from "../shared/img/login.png";
 import Avatar from "react-avatar";
 import { handleSaveQuestionResponse } from "../actions/questions";
@@ -18,32 +18,29 @@ class Poll extends Component {
   handleSelect = (e) => {
     this.setState({ select: e.target.value });
   };
-  
-  toParent = (e, id) => {
-    e.preventDefault()
-    this.props.history.push(`/poll/${id}`)
-  }
 
+  toParent = (e, id) => {
+    e.preventDefault();
+    this.props.history.push(`/poll/${id}`);
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.dispatch(
       handleSaveQuestionResponse(this.props.id, this.state.select)
     );
-
   };
 
   render() {
-
     const polls = [];
     Object.entries(this.props.questions).forEach(([key, value]) => {
-      polls.push(value)
+      polls.push(value);
     });
 
-    const pollx= this.props.questions[this.props.id]
+    //const pollx= this.props.questions[this.props.id]
 
-    const poll = polls.filter((p) => p.id === this.props.id)[0]
-    console.log("POLL =",poll)
+    const poll = polls.filter((p) => p.id === this.props.id)[0];
+    //console.log("POLL =",poll)
 
     if (this.props.authedUser === null)
       return (
@@ -58,6 +55,9 @@ class Poll extends Component {
     if (poll === undefined) {
       return <Redirect to="/notfound" />;
     }
+
+    const numberVotes =
+      poll.optionOne.votes.length + poll.optionTwo.votes.length;
 
     return (
       <div>
@@ -149,8 +149,52 @@ class Poll extends Component {
                   }}
                 >
                   <div className="card-block px-3">
-                    <h4 className="card-title">Result</h4>
-                    <ul>
+                    <h5 className="card-title">Result</h5>
+                    <div className="row justify-content-center">
+                      <div className="col-12 text-center mb-2">
+                        <div className="card secondary px-2">
+                          <div className="card-block mb-2 text-left">
+                            Would you rather be a {poll.optionOne.text}?
+                            {poll.optionOne.votes.includes(this.props.authedUser)&&(
+                              <i className="fa fa-check mx-1" style={{color:"blueviolet"}} />
+                            )}
+                          </div>
+                          <ProgressBar
+                            now={
+                              (poll.optionOne.votes.length / numberVotes).toFixed(2) * 100
+                            }
+                            label={`${
+                              (poll.optionOne.votes.length / numberVotes).toFixed(2) * 100
+                            }%`}
+                          />
+                          <div className="card-block mb-2">
+                            {poll.optionOne.votes.length} of {numberVotes} votes
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-12 text-center mb-2">
+                        <div className="card secondary  px-2">
+                          <div className="card-block mb-2 text-left">
+                            Would you rather be a {poll.optionTwo.text}?
+                            {poll.optionTwo.votes.includes(this.props.authedUser)&&(
+                              <i className="fa fa-check mx-1" style={{color:"blueviolet"}} />
+                            )}
+                          </div>
+                          <ProgressBar
+                            now={
+                               (poll.optionTwo.votes.length / numberVotes).toFixed(2) * 100
+                            }
+                            label={`${
+                               (poll.optionTwo.votes.length / numberVotes).toFixed(2) * 100
+                            }%`}
+                          />
+                          <div className="card-block mb-2">
+                            {poll.optionTwo.votes.length} of {numberVotes} votes
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* <ul>
                       <li>poll author: {poll.author}</li>
                       <li>poll id: {poll.id}</li>
                       <li>poll optionOne: {poll.optionOne.text}</li>(
@@ -158,7 +202,7 @@ class Poll extends Component {
                       <li>poll optionTwo: {poll.optionTwo.text}</li>(
                       {poll.optionTwo.votes.map((user) => "- " + user + ",")})
                       <li>poll timestamp: {poll.timestamp}</li>
-                    </ul>
+                    </ul> */}
                   </div>
                 </div>
               </div>
