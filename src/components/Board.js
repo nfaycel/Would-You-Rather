@@ -14,7 +14,6 @@ class Board extends Component {
       <div>
         {this.props.users.map((user, index) => 
         {
-          console.log("index = ",index)
           const  trophy =
             index === 0?
             {
@@ -46,7 +45,6 @@ class Board extends Component {
               borderStyle: "double",
               borderRadius: "10px",
             }:{}
-            console.log("trophy = ",trophy)
           return <UserBoard user={user} trophy={trophy} key={user.id}/>
         })}
       </div>
@@ -108,12 +106,11 @@ const UserBoard = (props) => {
 };
 
 const mapStateToProps = ({ users, authedUser }) => {
-  const usersArr = [];
+  const sortedUsers = [];
   Object.entries(users).forEach(([key, value]) => {
-    usersArr.push(value);
+    sortedUsers.push(value);
   });
-  console.log("users=", usersArr);
-  const sortedUsers = usersArr.sort((a,b)=>(b.questions.length+Object.keys(b.answers).length)-(a.questions.length+Object.keys(a.answers).length))
+  sortedUsers.sort((a,b)=>(b.questions.length+Object.keys(b.answers).length)-(a.questions.length+Object.keys(a.answers).length))
   
   return {
     authedUser,

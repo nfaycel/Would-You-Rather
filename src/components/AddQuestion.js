@@ -18,8 +18,6 @@ class AddQuestion extends Component {
       }
 
     handleOnChange = (e) => {
-        console.log("optionOne=",this.state.optionOne)
-        console.log("optionTwo=",this.state.optionTwo)
       e.target.name === "optionOne"
       ? (this.setState({optionOne: e.target.value}))
       : (this.setState({optionTwo: e.target.value}))

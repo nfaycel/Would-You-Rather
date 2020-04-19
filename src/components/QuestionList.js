@@ -49,7 +49,6 @@ class Question extends Component {
 
       return (
         <ListGroup style={{ width: "100%" }}>
-          {console.log("filter = :", this.props.filter)}
           {this.props.filter === "unanswered"
             ? questionsList
                 .filter(

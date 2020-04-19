@@ -20,7 +20,6 @@ class Home extends Component {
   }
 
   toggleFilter(e) {
-    console.log("event", e);
     this.setState({
       filter: e,
     });

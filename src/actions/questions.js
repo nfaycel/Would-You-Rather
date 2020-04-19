@@ -33,6 +33,7 @@ export function handleSaveQuestionResponse(qId, answer) {
       .then(() =>{
        dispatch(saveQuestionResponse({ author, qId, answer }))
        dispatch(saveQuestionResponseUser({ author, qId, answer }))
+       dispatch(hideLoading())
       })
   };
 }
@@ -55,8 +56,8 @@ export function handleAddQuestion(optionOne, optionTwo, authedUser) {
       .then((question) =>{
         dispatch(addQuestion(question))
         dispatch(AddQuestionUser({ qId: question.id, author: authedUser }))
+        dispatch(hideLoading())
       }
       )
-      .then(() => hideLoading());
   };
 }

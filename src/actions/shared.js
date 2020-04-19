@@ -10,6 +10,7 @@ export function getInitialData() {
     return loadInitialData().then(({ questions, users }) => {
       dispatch(loadQuestions(questions));
       dispatch(loadUsers(users));
+      dispatch(hideLoading())
     })
   };
 }

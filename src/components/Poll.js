@@ -37,10 +37,7 @@ class Poll extends Component {
       polls.push(value);
     });
 
-    //const pollx= this.props.questions[this.props.id]
-
     const poll = polls.filter((p) => p.id === this.props.id)[0];
-    //console.log("POLL =",poll)
 
     if (this.props.authedUser === null)
       return (

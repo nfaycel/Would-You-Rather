@@ -4,7 +4,6 @@ import { Navbar, Nav} from "react-bootstrap"
 import Avatar from 'react-avatar';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { Redirect } from 'react-router-dom'
 
 
 class Menu extends Component {
@@ -17,14 +16,8 @@ class Menu extends Component {
     selectedUser: '',
     toHome: false,
   }
-  
-  componentDidMount(){
-    // console.log("xxx: dispatch = ", this.props.dispatch)
-    // console.log('withrouter = ',this.props.history)
-  }
    
   handleLogout(){
-    console.log('lcikced')
     this.props.dispatch({type:"LOGOUT"})
     this.props.history.push("/home")
   }
@@ -33,15 +26,9 @@ class Menu extends Component {
   render() {
     
     const authed_user = this.props.authedUser
-    const dispatch = this.props.dispatch
     const { location } = this.props.history;
-
     const link_state = !authed_user?"disabled":null
-    // if(this.props.authedUser === null){
-    //   return <Redirect to="/Login"/>
-    // }
-
-
+ 
     return (
       //className='fixed-top'
       <Navbar collapseOnSelect expand="md" bg="navbar-dark" variant="dark">
