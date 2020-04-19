@@ -56,6 +56,8 @@ class Board extends Component {
 
 const UserBoard = (props) => {
   const user = props.user;
+  const answers = Object.keys(user.answers).length
+  const questions = user.questions.length
   return (
     <div className="container col-sm-10 col-md-8" key={user.id}>
       <div className="card py-3 mb-4">
@@ -82,11 +84,11 @@ const UserBoard = (props) => {
             <h5>{user.name}</h5>
             <div className="Row d-flex">
               <div className="col-10">Answerd questions:</div>
-              <div className="col-2">x</div>
+              <div className="col-2">{answers}</div>
             </div>
             <div className="Row d-flex">
               <div className="col-10">Created questions:</div>
-              <div className="col-2">{user.questions.length}</div>
+              <div className="col-2">{questions}</div>
             </div>
           </div>
           <div
@@ -97,7 +99,7 @@ const UserBoard = (props) => {
               margin: "3px 0 3px 0",
             }}
           >
-            mlqksjdfmlkjqsmlkj
+            Score:{questions+answers}
           </div>
         </div>
       </div>
@@ -111,9 +113,11 @@ const mapStateToProps = ({ users, authedUser }) => {
     usersArr.push(value);
   });
   console.log("users=", usersArr);
+  const sortedUsers = usersArr.sort((a,b)=>(b.questions.length+Object.keys(b.answers).length)-(a.questions.length+Object.keys(a.answers).length))
+  
   return {
     authedUser,
-    users: usersArr,
+    users: sortedUsers,
   };
 };
 
