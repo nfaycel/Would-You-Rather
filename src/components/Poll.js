@@ -67,7 +67,7 @@ class Poll extends Component {
         !poll.optionTwo.votes.includes(this.props.authedUser) ? (
           <div className="container col-sm-10 col-md-8">
             <div className="card">
-              <div className="card-header">{this.props.authedUser} asks: </div>
+              <div className="card-header">{poll.author} asks: </div>
               <div className="row mr-5">
                 <div className="col-md-3 d-flex justify-content-md-center align-items-center ">
                   <Avatar
@@ -131,7 +131,7 @@ class Poll extends Component {
           <div className="container col-sm-10 col-md-8">
             <div className="card">
               <div className="card-header">
-                <h5>Asked by {this.props.authedUser}</h5>{" "}
+                <h5>Asked by {poll.author}</h5>{" "}
               </div>
               <div className="row mr-5">
                 <div className="col-md-3 d-flex justify-content-md-center align-items-center ">

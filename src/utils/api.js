@@ -20,6 +20,5 @@ export function saveQuestion(data){
 }
 
 export function saveQuestionAnswer(data){
-    console.log("the data of action is",data)
     return _saveQuestionAnswer(data)
 }

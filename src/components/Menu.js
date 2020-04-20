@@ -55,7 +55,6 @@ class Menu extends Component {
 }
 
 const mapStateToProps = ({authedUser,users}) => {
-  console.log(authedUser)
   return {
     authedUser,
     userAvatar : users[authedUser]!== undefined ? users[authedUser].avatarURL : null

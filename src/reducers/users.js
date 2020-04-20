@@ -21,7 +21,6 @@ export default function users(state = {}, action) {
         },
       };
       case ADD_QUESTION_USER:
-        console.log("question is here",action)
         return {
           ...state,
           [action.author]: {

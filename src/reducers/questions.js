@@ -10,8 +10,6 @@ export default function questions(state = {}, action) {
           ...action.questions,
       };
     case SAVE_QUESTION_ANSWER:
-      console.log("action from save_action_answer", action);
-      console.log("the state=",{...state});
       return {
           ...state,
           [action.qId]: {
