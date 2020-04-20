@@ -15,11 +15,11 @@ export function loadInitialData(){
     }))
 }
 
-export function saveQuestion(data){ // data = question object
+export function saveQuestion(data){
     return _saveQuestion(data)
 }
 
 export function saveQuestionAnswer(data){
-    console.log("the data of action is",data) // data = { authedUser, qid, answer }
+    console.log("the data of action is",data)
     return _saveQuestionAnswer(data)
 }

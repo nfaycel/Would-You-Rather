@@ -26,8 +26,6 @@ export default function questions(state = {}, action) {
       };
 
       case ADD_QUESTION:
-        // const id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-        console.log(action)
       return {
         ...state,
             [action.question.id]: action.question

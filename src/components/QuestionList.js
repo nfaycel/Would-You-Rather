@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { ListGroup,Button,Badge } from "react-bootstrap";
 import { connect } from "react-redux";
 import { withRouter } from 'react-router'
-import login from "../shared/img/login.png";
 import Avatar from 'react-avatar';
 import {Link} from 'react-router-dom'
 
@@ -14,15 +13,17 @@ class Question extends Component {
         const time = d.toLocaleTimeString('en-US')
         return time.substr(0, 5) + time.slice(-2) + ' | ' + d.toLocaleDateString()
       }
+
       
       return (
-        // <Link to={`/questions/${question.question.id}`} 
+        
         <Link to={`/questions/${question.question.id}`}
+       
           className="card flex-row flex-wrap text-left shadow-sm p-3 mb-2 bg-white rounded"
-          //shadow-sm p-3 mb-2 bg-white rounded
+          
           style={{ width: "100%" }}>
           <div className="card-header border-0">
-            <Avatar color={"#C28EFC"} src={login} size="80" round={true} />
+            <Avatar color={"#C28EFC"} src={question.question.avatarURL} size="80" round={true} />
           </div>
           <div className="card-block px-2">
           <Badge variant="light">{question.question.author} asks:</Badge>
@@ -35,18 +36,21 @@ class Question extends Component {
             <Button variant="secondary" size="sm">
               View Poll
             </Button>
-            {/* <Link className='btn' to={`/questions/${question.question.id}`}>View Poll</Link> */}
           </div>
           </Link>
-        // </Link>
       );
     }
   }
   
   class QuestionList extends Component {
     render() {
-      const questionsList = Object.values(this.props.questions).sort(function(a, b){return b.timestamp - a.timestamp});
+      const users = this.props.users
+      const questionsList = []
 
+      this.props.questions.map((question =>(
+        questionsList.push({...question, avatarURL: users[question.author].avatarURL})
+      )))
+      
       return (
         <ListGroup style={{ width: "100%" }}>
           {this.props.filter === "unanswered"
@@ -55,7 +59,6 @@ class Question extends Component {
                   (question) =>
                     question.optionOne.votes.indexOf(this.props.authedUser) <=-1 &&
                     question.optionTwo.votes.indexOf(this.props.authedUser) <= -1
-                   
                 )
                 .map((question) => (
                   <ListGroup.Item key={question.id}>
@@ -78,9 +81,10 @@ class Question extends Component {
     }
   }
 
-  const mapStateToProps = ({authedUser,questions}) => ({
+  const mapStateToProps = ({authedUser,questions,users}) => ({
     authedUser,
-    questions
+    questions: Object.values(questions).sort(function(a, b){return b.timestamp - a.timestamp}),
+    users
   });
   
   export default withRouter(connect(mapStateToProps)(QuestionList));

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router-dom";
 import { Form, Button, ProgressBar } from "react-bootstrap";
-import login from "../shared/img/login.png";
 import Avatar from "react-avatar";
 import { handleSaveQuestionResponse } from "../actions/questions";
 
@@ -32,10 +31,17 @@ class Poll extends Component {
   };
 
   render() {
-    const polls = [];
+    const users = this.props.users;
+    const questions = [];
+
     Object.entries(this.props.questions).forEach(([key, value]) => {
-      polls.push(value);
+      questions.push(value);
     });
+
+    const polls = [];
+    questions.map((question) =>
+      polls.push({ ...question, avatarURL: users[question.author].avatarURL })
+    );
 
     const poll = polls.filter((p) => p.id === this.props.id)[0];
 
@@ -53,8 +59,7 @@ class Poll extends Component {
       return <Redirect to="/notfound" />;
     }
 
-    const numberVotes =
-      poll.optionOne.votes.length + poll.optionTwo.votes.length;
+    const numberVotes = poll.optionOne.votes.length + poll.optionTwo.votes.length;
 
     return (
       <div>
@@ -67,7 +72,7 @@ class Poll extends Component {
                 <div className="col-md-3 d-flex justify-content-md-center align-items-center ">
                   <Avatar
                     color={"#C28EFC"}
-                    src={login}
+                    src={poll.avatarURL}
                     size="90"
                     round={true}
                   />
@@ -132,7 +137,7 @@ class Poll extends Component {
                 <div className="col-md-3 d-flex justify-content-md-center align-items-center ">
                   <Avatar
                     color={"#C28EFC"}
-                    src={login}
+                    src={poll.avatarURL}
                     size="90"
                     round={true}
                   />
@@ -152,16 +157,25 @@ class Poll extends Component {
                         <div className="card secondary px-2">
                           <div className="card-block mb-2 text-left">
                             Would you rather be a {poll.optionOne.text}?
-                            {poll.optionOne.votes.includes(this.props.authedUser)&&(
-                              <i className="fa fa-check mx-1" style={{color:"blueviolet"}} />
+                            {poll.optionOne.votes.includes(
+                              this.props.authedUser
+                            ) && (
+                              <i
+                                className="fa fa-check mx-1"
+                                style={{ color: "blueviolet" }}
+                              />
                             )}
                           </div>
                           <ProgressBar
                             now={
-                              (poll.optionOne.votes.length / numberVotes).toFixed(2) * 100
+                              (
+                                poll.optionOne.votes.length / numberVotes
+                              ).toFixed(2) * 100
                             }
                             label={`${
-                              (poll.optionOne.votes.length / numberVotes).toFixed(2) * 100
+                              (
+                                poll.optionOne.votes.length / numberVotes
+                              ).toFixed(2) * 100
                             }%`}
                           />
                           <div className="card-block mb-2">
@@ -173,16 +187,25 @@ class Poll extends Component {
                         <div className="card secondary  px-2">
                           <div className="card-block mb-2 text-left">
                             Would you rather be a {poll.optionTwo.text}?
-                            {poll.optionTwo.votes.includes(this.props.authedUser)&&(
-                              <i className="fa fa-check mx-1" style={{color:"blueviolet"}} />
+                            {poll.optionTwo.votes.includes(
+                              this.props.authedUser
+                            ) && (
+                              <i
+                                className="fa fa-check mx-1"
+                                style={{ color: "blueviolet" }}
+                              />
                             )}
                           </div>
                           <ProgressBar
                             now={
-                               (poll.optionTwo.votes.length / numberVotes).toFixed(2) * 100
+                              (
+                                poll.optionTwo.votes.length / numberVotes
+                              ).toFixed(2) * 100
                             }
                             label={`${
-                               (poll.optionTwo.votes.length / numberVotes).toFixed(2) * 100
+                              (
+                                poll.optionTwo.votes.length / numberVotes
+                              ).toFixed(2) * 100
                             }%`}
                           />
                           <div className="card-block mb-2">
@@ -191,15 +214,6 @@ class Poll extends Component {
                         </div>
                       </div>
                     </div>
-                    {/* <ul>
-                      <li>poll author: {poll.author}</li>
-                      <li>poll id: {poll.id}</li>
-                      <li>poll optionOne: {poll.optionOne.text}</li>(
-                      {poll.optionOne.votes.map((user) => "- " + user + ",")})
-                      <li>poll optionTwo: {poll.optionTwo.text}</li>(
-                      {poll.optionTwo.votes.map((user) => "- " + user + ",")})
-                      <li>poll timestamp: {poll.timestamp}</li>
-                    </ul> */}
                   </div>
                 </div>
               </div>
@@ -211,11 +225,12 @@ class Poll extends Component {
   }
 }
 
-const mapStateToProps = ({ authedUser, questions }, props) => {
+const mapStateToProps = ({ authedUser, questions, users }, props) => {
   const { id } = props.match.params;
   return {
     authedUser,
     questions,
+    users,
     id,
   };
 };

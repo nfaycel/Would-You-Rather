@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Card, Button, Form, Row, Col, img } from "react-bootstrap";
+import { Card, Button, Form, Row, Col, Container } from "react-bootstrap";
 import image from "../shared/img/login.png";
 import { Redirect } from "react-router-dom";
 import { getInitialData } from "../actions/shared";
@@ -8,9 +8,6 @@ import { getInitialData } from "../actions/shared";
 class Login extends Component {
   componentDidMount() {
     this.props.dispatch(getInitialData());
-    // this.props.dispatch({type:"LOGIN", id:"xxxxx"})
-    // this.props.dispatch({type:"LOGIN", id:"Nouar faical"})
-    //this.props.dispatch({type:"LOGOUT"})
   }
 
   constructor(props) {
@@ -18,13 +15,12 @@ class Login extends Component {
 
     this.handleSelect = this.handleSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
- 
   }
    state = {
       value: "",
       toPrev: false,
     };
+
   handleSelect = (e) => {
     this.setState({ value: e.target.value });
   };
@@ -48,27 +44,25 @@ class Login extends Component {
     }
 
     return (
-      <Card
-        className="text-center col-md-12 col-lg-8 justify-content-center"
-        style={{ margin: "auto" }}
-      >
+      <Container className="col-8">
+      <Card className="text-center">
         <Card.Header>
           <h4>Welcome to the Would You Rather App!</h4>
         </Card.Header>
         <Card.Body>
           <img
-            className="card-img"
+            className="card-img mb-3"
             src={image}
-            style={{ width: "25%", height: "25%" }}
+            style={{ width: "25%", height: "50%" }}
             alt="login icon"
           ></img>
           <Card.Title>Please sign in to continue</Card.Title>
           <Form onSubmit={this.handleSubmit}>
             <Form.Group as={Row} controlId="formGridState">
-              <Form.Label column sm={4}>
+              <Form.Label column sm={5}>
                 Select your username :
               </Form.Label>
-              <Col sm={4}>
+              <Col>
                 <Form.Control
                   as="select"
                   value={this.state.value}
@@ -86,14 +80,14 @@ class Login extends Component {
               type="submit"
               block
               size="sm"
-              disabled={this.state.value === ""}
-            >
+              disabled={this.state.value === ""}>
               Login
             </Button>
           </Form>
         </Card.Body>
         <Card.Footer className="text-muted"></Card.Footer>
       </Card>
+      </Container>
     );
   }
 }

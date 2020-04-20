@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import login from "../shared/img/login.png";
 import Avatar from "react-avatar";
-
-
 
 class Board extends Component {
   render() {
-    if (this.props.authedUser === null) return <Redirect to="/Login" />;
+    if (this.props.authedUser === null) 
+      return <Redirect to="/Login" />;
 
     return (
       <div>
@@ -24,6 +22,7 @@ class Board extends Component {
               backgroundColor: "lightgray",
               borderStyle: "double",
               borderRadius: "10px",
+              boxShadow: "0 4px 8px 0 rgba(115, 65, 255, 0.47), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
             }
             : index === 1?
             {
@@ -34,6 +33,7 @@ class Board extends Component {
               backgroundColor: "white",
               borderStyle: "double",
               borderRadius: "10px",
+              boxShadow: "0 4px 8px 0 rgba(115, 65, 255, 0.47), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
             }
             : index === 2?
             {
@@ -44,6 +44,7 @@ class Board extends Component {
               backgroundColor: "white",
               borderStyle: "double",
               borderRadius: "10px",
+              boxShadow: "0 4px 8px 0 rgba(115, 65, 255, 0.47), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
             }:{}
           return <UserBoard user={user} trophy={trophy} key={user.id}/>
         })}
@@ -57,19 +58,16 @@ const UserBoard = (props) => {
   const answers = Object.keys(user.answers).length
   const questions = user.questions.length
   return (
-    <div className="container col-sm-10 col-md-8" key={user.id}>
+    <div className="container col-sm-10 col-md-8">
       <div className="card py-3 mb-4">
         <sup>
-          <span
-          
-            style={props.trophy}
-          >
+          <span style={props.trophy} >
             <i className="fa fa-trophy fa-3x"></i>
           </span>
         </sup>
         <div className="row mr-5">
           <div className="col-md-3 d-flex justify-content-md-center align-items-center ">
-            <Avatar color={"#C28EFC"} src={login} size="90" round={true} />
+            <Avatar color={"#C28EFC"} src={user.avatarURL} size="90" round={true} />
           </div>
           <div
             className="col px-3"
@@ -77,17 +75,16 @@ const UserBoard = (props) => {
               borderLeft: "solid",
               borderColor: "#FEFBDF",
               margin: "3px 0 3px 0",
-            }}
-          >
-            <h5>{user.name}</h5>
-            <div className="Row d-flex">
-              <div className="col-10">Answerd questions:</div>
-              <div className="col-2">{answers}</div>
-            </div>
-            <div className="Row d-flex">
-              <div className="col-10">Created questions:</div>
-              <div className="col-2">{questions}</div>
-            </div>
+            }}>
+              <h5>{user.name}</h5>
+              <div className="Row d-flex">
+                <div className="col-10">Answerd questions:</div>
+                <div className="col">{answers}</div>
+              </div>
+              <div className="Row d-flex">
+                <div className="col-10">Created questions:</div>
+                <div className="col">{questions}</div>
+              </div>
           </div>
           <div
             className="col-md-3 px-3"
@@ -95,8 +92,7 @@ const UserBoard = (props) => {
               borderLeft: "solid",
               borderColor: "#FEFBDF",
               margin: "3px 0 3px 0",
-            }}
-          >
+            }}>
             Score:{questions+answers}
           </div>
         </div>

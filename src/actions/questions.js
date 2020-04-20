@@ -5,7 +5,7 @@ import { AddQuestionUser } from "../actions/users";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS";
-export const SAVE_QUESTION_ANSWER = "SAVE_QUESTION_ANSWER"; //authedUser, qid, answer
+export const SAVE_QUESTION_ANSWER = "SAVE_QUESTION_ANSWER";
 export const ADD_QUESTION = "ADD_QUESTION";
 
 export function loadQuestions(questions) {

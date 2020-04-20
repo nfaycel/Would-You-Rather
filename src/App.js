@@ -8,11 +8,9 @@ import Board from "./components/Board";
 import Poll from "./components/Poll";
 import AddQuestion from "./components/AddQuestion";
 import NotFound from "./components/NotFound";
-
 import Login from "./components/Login";
 import { Component } from "react";
 import LoadingBar from "react-redux-loading-bar";
-
 // import {getInitialData} from './actions/shared'
 
 class App extends Component {
@@ -24,11 +22,9 @@ class App extends Component {
     console.log(this.props);
     return (
       <>
-      
       <Router>
         <LoadingBar />
         <div className="App">
-
           <Container className='mt-3'>
             <Menu />
             <Jumbotron>

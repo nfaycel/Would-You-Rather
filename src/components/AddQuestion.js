@@ -7,10 +7,8 @@ import { handleAddQuestion } from "../actions/questions";
 class AddQuestion extends Component {
     constructor(props) {
         super(props);
-    
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
-
         this.state = {
           optionOne: "",
           optionTwo: ""
@@ -23,15 +21,11 @@ class AddQuestion extends Component {
       : (this.setState({optionTwo: e.target.value}))
     }
 
-    
-
     handleSubmit = (e) => {
         e.preventDefault();
-      //  alert(this.props.authedUser+", "+this.state.optionOne+",  "+this.state.optionTwo)
         this.props.dispatch(handleAddQuestion(this.state.optionOne,this.state.optionTwo,this.props.authedUser))
         this.props.history.push('/')
       };
-
 
   render() {
     if (this.props.authedUser === null) return <Redirect to="/Login" />;
@@ -61,5 +55,4 @@ class AddQuestion extends Component {
 }
 
 const mapStateToProps = (authedUser) => authedUser;
-
 export default connect(mapStateToProps)(AddQuestion);
