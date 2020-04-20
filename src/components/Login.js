@@ -5,7 +5,6 @@ import image from "../shared/img/login.png";
 import { Redirect } from "react-router-dom";
 import { getInitialData } from "../actions/shared";
 
-
 class Login extends Component {
   componentDidMount() {
     this.props.dispatch(getInitialData());
@@ -13,7 +12,6 @@ class Login extends Component {
 
   constructor(props) {
     super(props);
-
     this.handleSelect = this.handleSelect.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -36,17 +34,18 @@ class Login extends Component {
 
   render() {
     const users = Object.entries(this.props.users);
-    const UserOptions = users.map((user) => 
-        <option value={user[1].id} key={user[1].id}>{user[1].name}</option>
-        )
+    const UserOptions = users.map((user) => (
+      <option value={user[1].id} key={user[1].id}>
+        {user[1].name}
+      </option>
+    ));
 
     const { toPrev } = this.state;
     const { redirectUrl } =
       this.props.location.state !== undefined &&
-      this.props.location.state !== null
+      this.props.location.state !== ""
         ? this.props.location.state
         : "/";
-
     if (toPrev === true) {
       return <Redirect to={redirectUrl} />;
     }

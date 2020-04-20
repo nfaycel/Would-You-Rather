@@ -1,3 +1,10 @@
+# To test the project 
+1. Clone the project using this command (git clone https://github.com/nfaycel/Would-You-Rather)
+2. Navigate to the project folder using `cd Would-You-Rather` and run `npm install`
+3. Start the project with this command (`npm start`) 
+4. The browser should open the home page of the project, if not type this in your browser http://localhost:3000
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

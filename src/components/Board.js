@@ -100,10 +100,16 @@ const UserBoard = (props) => {
               borderLeft: "solid",
               borderColor: "#FEFBDF",
               margin: "3px 0 3px 0",
-            }}>
+            }}
+          >
             <div className="card Row text-center">
               <div className="card-header">Score</div>
-              <div className="card-text" style={{backgroundColor: "blueviolet",color:"white"}}>{questions + answers}</div>
+              <div
+                className="card-text"
+                style={{ backgroundColor: "blueviolet", color: "white" }}
+              >
+                {questions + answers}
+              </div>
             </div>
           </div>
         </div>

@@ -59,7 +59,8 @@ class Poll extends Component {
       return <Redirect to="/notfound" />;
     }
 
-    const numberVotes = poll.optionOne.votes.length + poll.optionTwo.votes.length;
+    const numberVotes =
+      poll.optionOne.votes.length + poll.optionTwo.votes.length;
 
     return (
       <div>

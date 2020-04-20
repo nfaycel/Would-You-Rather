@@ -5,7 +5,7 @@ export function login(id) {
   return {
     type: LOGIN,
     id,
-  }
+  };
 }
 
 export function logout() {
@@ -13,5 +13,3 @@ export function logout() {
     type: LOGOUT,
   };
 }
-
-

@@ -21,28 +21,28 @@ class App extends Component {
   render() {
     return (
       <>
-      <Router>
-        <LoadingBar />
-        <div className="App">
-          <Container className='mt-3'>
-            <Menu />
-            <Jumbotron>
-              <Switch>
-                <Route path="/home" component={Home} />
-                <Route path="/questions/:id" component={Poll} />
-                <Route path="/notfound" component={NotFound} />
-                <Route path="/leaderboard" component={Board} />
-                <Route path="/add" component={AddQuestion} />
-                <Route path="/login" component={Login} />
-                <Route path="/" component={Home} />
-              </Switch>
-            </Jumbotron>
-          </Container>
-        </div>
-      </Router>
+        <Router>
+          <LoadingBar />
+          <div className="App">
+            <Container className="mt-3">
+              <Menu />
+              <Jumbotron>
+                <Switch>
+                  <Route path="/home" component={Home} />
+                  <Route path="/questions/:id" component={Poll} />
+                  <Route path="/notfound" component={NotFound} />
+                  <Route path="/leaderboard" component={Board} />
+                  <Route path="/add" component={AddQuestion} />
+                  <Route path="/login" component={Login} />
+                  <Route path="/" component={Home} />
+                </Switch>
+              </Jumbotron>
+            </Container>
+          </div>
+        </Router>
       </>
     );
   }
 }
 
-export default (App);
+export default App;

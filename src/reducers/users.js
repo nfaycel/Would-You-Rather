@@ -1,6 +1,6 @@
 export const LOAD_USERS = "LOAD_USERS";
 export const SAVE_QUESTION_ANSWER_USER = "SAVE_QUESTION_ANSWER_USER";
-export const ADD_QUESTION_USER = 'ADD_QUESTION_USER'
+export const ADD_QUESTION_USER = "ADD_QUESTION_USER";
 
 export default function users(state = {}, action) {
   switch (action.type) {
@@ -14,20 +14,20 @@ export default function users(state = {}, action) {
         ...state,
         [action.author]: {
           ...state[action.author],
-            answers:{
-                ...state[action.author].answers,
-                    [action.qId]:action.answer
-            }
+          answers: {
+            ...state[action.author].answers,
+            [action.qId]: action.answer,
+          },
         },
       };
-      case ADD_QUESTION_USER:
-        return {
-          ...state,
-          [action.author]: {
-            ...state[action.author],
-              questions: state[action.author].questions.concat(action.qId)
-          },
-        };
+    case ADD_QUESTION_USER:
+      return {
+        ...state,
+        [action.author]: {
+          ...state[action.author],
+          questions: state[action.author].questions.concat(action.qId),
+        },
+      };
     default:
       return state;
   }

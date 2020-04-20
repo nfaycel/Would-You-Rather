@@ -29,12 +29,13 @@ export function handleSaveQuestionResponse(qId, answer) {
     dispatch(showLoading());
     const author = getState().authedUser;
 
-    return saveQuestionAnswer({ authedUser: author, qid: qId, answer })
-      .then(() =>{
-       dispatch(saveQuestionResponse({ author, qId, answer }))
-       dispatch(saveQuestionResponseUser({ author, qId, answer }))
-       dispatch(hideLoading())
-      })
+    return saveQuestionAnswer({ authedUser: author, qid: qId, answer }).then(
+      () => {
+        dispatch(saveQuestionResponse({ author, qId, answer }));
+        dispatch(saveQuestionResponseUser({ author, qId, answer }));
+        dispatch(hideLoading());
+      }
+    );
   };
 }
 
@@ -52,12 +53,10 @@ export function handleAddQuestion(optionOne, optionTwo, authedUser) {
       optionOneText: optionOne,
       optionTwoText: optionTwo,
       author: authedUser,
-    })
-      .then((question) =>{
-        dispatch(addQuestion(question))
-        dispatch(AddQuestionUser({ qId: question.id, author: authedUser }))
-        dispatch(hideLoading())
-      }
-      )
+    }).then((question) => {
+      dispatch(addQuestion(question));
+      dispatch(AddQuestionUser({ qId: question.id, author: authedUser }));
+      dispatch(hideLoading());
+    });
   };
 }

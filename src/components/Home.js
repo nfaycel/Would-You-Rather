@@ -3,12 +3,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Nav } from "react-bootstrap";
-import  QuestionList from './QuestionList'
-
+import QuestionList from "./QuestionList";
 
 class Home extends Component {
   componentDidMount() {
-   // if (this.props.authedUser !== null) this.props.dispatch(getInitialData());
+    // if (this.props.authedUser !== null) this.props.dispatch(getInitialData());
   }
 
   constructor(props) {
@@ -25,9 +24,15 @@ class Home extends Component {
   }
 
   render() {
-    
-    if (this.props.authedUser === null) 
-      return <Redirect to={{pathname: '/login', state: {redirectUrl: this.props.location.pathname}}} />;
+    if (this.props.authedUser === null)
+      return (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { redirectUrl: this.props.location.pathname },
+          }}
+        />
+      );
     return (
       <Container className="justify-content-center fluid">
         <Col
@@ -52,9 +57,7 @@ class Home extends Component {
             </Nav.Item>
           </Nav>
           <Row style={{ backgroundColor: "white", margin: "0px 1px 0px 1px" }}>
-            <QuestionList
-              filter={this.state.filter}
-            />
+            <QuestionList filter={this.state.filter} />
           </Row>
         </Col>
       </Container>
@@ -63,7 +66,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  authedUser: state.authedUser
+  authedUser: state.authedUser,
 });
 
 export default connect(mapStateToProps)(Home);
