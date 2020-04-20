@@ -25,9 +25,7 @@ class Poll extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.dispatch(
-      handleSaveQuestionResponse(this.props.id, this.state.select)
-    );
+    this.props.handleSaveQuestionResponse(this.props.id, this.state.select);
   };
 
   render() {
@@ -236,8 +234,8 @@ const mapStateToProps = ({ authedUser, questions, users }, props) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatch,
-});
+const mapDispatchToProps = {
+  handleSaveQuestionResponse
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Poll));

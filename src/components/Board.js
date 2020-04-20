@@ -5,7 +5,15 @@ import Avatar from "react-avatar";
 
 class Board extends Component {
   render() {
-    if (this.props.authedUser === null) return <Redirect to="/Login" />;
+    if (this.props.authedUser === null)
+      return (
+        <Redirect
+          to={{
+            pathname: "/Login",
+            state: { redirectUrl: this.props.location.pathname },
+          }}
+        />
+      );
 
     return (
       <div>

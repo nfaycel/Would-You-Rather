@@ -16,9 +16,9 @@ class AddQuestion extends Component {
   }
 
   handleOnChange = (e) => {
-    e.target.name === "optionOne"
-      ? this.setState({ optionOne: e.target.value })
-      : this.setState({ optionTwo: e.target.value });
+    this.setState({
+      [e.target.name] : e.target.value 
+    })
   };
 
   handleSubmit = (e) => {
@@ -34,7 +34,16 @@ class AddQuestion extends Component {
   };
 
   render() {
-    if (this.props.authedUser === null) return <Redirect to="/Login" />;
+    if (this.props.authedUser === null)
+    return (
+      <Redirect
+        to={{
+          pathname: "/Login",
+          state: { redirectUrl: this.props.location.pathname },
+        }}
+      />
+    );
+
     return (
       <Container className="col-8">
         <Card className="text-center">
